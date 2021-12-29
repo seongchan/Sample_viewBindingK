@@ -3,6 +3,7 @@ package com.clipandbooks.sample.sampleviewbindingk
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.clipandbooks.sample.sampleviewbindingk.databinding.ActivityMainBinding
 
@@ -33,9 +34,14 @@ class MainActivity : AppCompatActivity() {
 
     fun addUserProfile(view: View?) {
         val userProfile = UserProfile()
-        userProfile.name = binding.name.text.toString()
-        userProfile.phone = binding.phone.text.toString()
-        userProfile.address = binding.address.text.toString()
-        userProfileViewModel.insert(userProfile)
+        if (userProfile.name.isNullOrEmpty() || userProfile.phone.isNullOrEmpty() || userProfile.address.isNullOrEmpty()) {
+            Toast.makeText(this, "누락된 값이 있습니다.", Toast.LENGTH_SHORT).show();
+        } else {
+            userProfile.name = binding.name.text.toString()
+            userProfile.phone = binding.phone.text.toString()
+            userProfile.address = binding.address.text.toString()
+            userProfileViewModel.insert(userProfile)
+        }
+
     }
 }
