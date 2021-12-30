@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SampleViewBindingK"
 include ':app'
+include ':sampleRoom1'
+include ':sampleRoom2'
