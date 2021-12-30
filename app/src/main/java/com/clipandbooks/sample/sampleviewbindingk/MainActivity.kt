@@ -6,16 +6,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.clipandbooks.sample.sampleviewbindingk.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding : ActivityMainBinding
+    lateinit var mBinding : ActivityMainBinding
     lateinit var userProfileViewModel:UserProfieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         userProfileViewModel = ViewModelProvider(this).get(UserProfieViewModel::class.java)
         userProfileViewModel.userProfileList.observe(this, { userProfiles -> updateUserProfileList(userProfiles) })
     }
@@ -29,16 +30,19 @@ class MainActivity : AppCompatActivity() {
             """.trimIndent()
         }
 
-        binding!!.result.text = userListText
+        mBinding.result.text = userListText
     }
 
     fun addUserProfile(view: View?) {
         val userProfile = UserProfile()
-        userProfile.name = binding.name.text.toString()
-        userProfile.phone = binding.phone.text.toString()
-        userProfile.address = binding.address.text.toString()
+        userProfile.name = mBinding.name.text.toString()
+        userProfile.phone = mBinding.phone.text.toString()
+        userProfile.address = mBinding.address.text.toString()
         if (userProfile.name.isNullOrEmpty() || userProfile.phone.isNullOrEmpty() || userProfile.address.isNullOrEmpty()) {
-            Toast.makeText(this, "누락된 값이 있습니다.", Toast.LENGTH_SHORT).show();
+            // Toast 출력
+            //Toast.makeText(this, "누락된 값이 있습니다.", Toast.LENGTH_SHORT).show()
+            // Snackbar 출력
+            Snackbar.make(mBinding.mainLayout,"누락된 값이 있습니다.", Snackbar.LENGTH_SHORT ).show()
         } else {
             userProfileViewModel.insert(userProfile)
         }
