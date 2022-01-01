@@ -1,12 +1,12 @@
 package com.clipandbooks.sample.sampleroom2
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 
 import com.clipandbooks.sample.sampleroom2.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
             val tempItem = mBinding.inputTodo.text.toString()
             if (tempItem.isNullOrEmpty()) {
-                Toast.makeText(this, "값을 입력해주세요", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "값을 입력해주세요", Toast.LENGTH_SHORT).show()
+                Snackbar.make(mBinding.mainLayout, "값을 입력해 주세요", Snackbar.LENGTH_SHORT).show()
             } else {
                 var todoItem = Todo()
                 todoItem.title = mBinding.inputTodo.text.toString()
